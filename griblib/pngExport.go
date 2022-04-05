@@ -78,13 +78,11 @@ func imageFromMessage(message *Message) (image.Image, error) {
 		for y := 0; y < height; y++ {
 			for x := 0; x < width; x++ {
 				value := message.Section7.Data[y*width+x]
-				red := uint8(0)
-				blue := uint8(254)
 				rgbaImage.Set(x, y, color.NRGBA{
-					R: red,
+					R: RedValue(value, maxValue, minValue),
 					G: 0,
-					B: blue,
-					A: RedValue(value, maxValue, minValue),
+					B: RedValue(maxValue-value, maxValue, minValue),
+					A: uint8(254),
 				})
 			}
 		}
