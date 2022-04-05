@@ -103,8 +103,9 @@ func blueValue(value float64, maxValue float64, minValue float64) uint8 {
 // RedValue returns a number between 0 and 255
 func RedValue(value float64, maxValue float64, minValue float64) uint8 {
 	//value  = value - 273
+	len := maxValue - minValue
 	if value > 0 {
-		percentOfMaxValue := (math.Abs(value) + math.Abs(minValue)) / (math.Abs(maxValue) + math.Abs(minValue))
+		percentOfMaxValue := value / len
 		return uint8(percentOfMaxValue * 255.0)
 	}
 	return 0
