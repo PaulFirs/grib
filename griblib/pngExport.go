@@ -119,14 +119,14 @@ func RGBValue(value float64, maxValue float64, minValue float64) (uint8, uint8, 
 	} else if value < part * 5 {
 		red = ((value - part * 4) / part + 1) * 128
 		green = 255
-		blue = (-(value - part * 4) / part) * 128
+		blue = (-(value - part * 4) / part + 1) * 128
 	} else if value < part * 6 {
 		red = 255
 		green = (-(value - part * 5) / part + 2) * 128
 		blue = 0
 	} else if value < part * 7 {
 		red = 255
-		green = (-(value - part * 6) / part) * 128
+		green = (-(value - part * 6) / part + 1) * 128
 		blue = 0
 	} else if value <= part * 8 {
 		red = (-(value - part * 7) / part + 2) * 128
