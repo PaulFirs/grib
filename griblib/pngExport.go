@@ -95,41 +95,42 @@ func imageFromMessage(message *Message) (image.Image, error) {
 // RGBValue returns a number between 0 and 255
 func RGBValue(value float64, maxValue float64, minValue float64) (uint8, uint8, uint8) {
 	//value  = value - 273
-	part := (maxValue - minValue) / 8
+	part := (maxValue - minValue) / 12
 	value = value - minValue
-	red := 0.0
-	green := 0.0
-	blue := 0.0
-	if value < part * 1 {
+	if value < part * 4 {
+		red := 0.0
+		green := 0.0
+		blue := 128.0
+	} else if value < part * 5 {
 		red = 0
 		green = 0
-		blue = ((value - part * 0) / part + 1) * 128
-	} else if value < part * 2 {
-		red = 0
-		green = ((value - part * 1) / part) * 128
-		blue = 255
-	} else if value < part * 3 {
-		red = 0
-		green = ((value - part * 2) / part + 1) * 128
-		blue = 255
-	} else if value < part * 4 {
-		red = ((value - part * 3) / part) * 128
-		green = 255
-		blue = (-(value - part * 3) / part + 2) * 128
-	} else if value < part * 5 {
-		red = ((value - part * 4) / part + 1) * 128
-		green = 255
-		blue = (-(value - part * 4) / part + 1) * 128
+		blue = ((value - part * 4) / part + 1) * 128
 	} else if value < part * 6 {
-		red = 255
-		green = (-(value - part * 5) / part + 2) * 128
-		blue = 0
+		red = 0
+		green = ((value - part * 5) / part) * 128
+		blue = 255
 	} else if value < part * 7 {
+		red = 0
+		green = ((value - part * 6) / part + 1) * 128
+		blue = 255
+	} else if value < part * 8 {
+		red = ((value - part * 7) / part) * 128
+		green = 255
+		blue = (-(value - part * 7) / part + 2) * 128
+	} else if value < part * 9 {
+		red = ((value - part * 8) / part + 1) * 128
+		green = 255
+		blue = (-(value - part * 8) / part + 1) * 128
+	} else if value < part * 10 {
 		red = 255
-		green = (-(value - part * 6) / part + 1) * 128
+		green = (-(value - part * 9) / part + 2) * 128
 		blue = 0
-	} else if value <= part * 8 {
-		red = (-(value - part * 7) / part + 2) * 128
+	} else if value < part * 11 {
+		red = 255
+		green = (-(value - part * 10) / part + 1) * 128
+		blue = 0
+	} else if value <= part * 12 {
+		red = (-(value - part * 11) / part + 2) * 128
 		green = 0
 		blue = 0
 	}
