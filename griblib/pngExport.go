@@ -107,6 +107,54 @@ func RGBValue(value float64, maxValue float64, minValue float64) (uint8, uint8, 
 	} else if value < part * 5 {
 		red = 0
 		green = 0
+		blue = -127 * math.Pow((value - (part * 5)) / part, 2) + 255
+	} else if value < part * 6 {
+		red = 0
+		green = 128 * math.Pow((value - (part * 5)) / part, 2)
+		blue = 255
+	} else if value < part * 7 {
+		red = 0
+		green = -127 * math.Pow((value - (part * 7)) / part, 2) + 255
+		blue = 255
+	} else if value < part * 8 {
+		red = 128 * math.Pow((value - (part * 7)) / part, 2)
+		green = 255
+		blue = -127 * math.Pow((value - (part * 7)) / part, 2) + 255
+	} else if value < part * 9 {
+		red = -127 * math.Pow((value - (part * 7)) / part, 2) + 255
+		green = 255
+		blue = 128 * math.Pow((value - (part * 9)) / part, 2)
+	} else if value < part * 10 {
+		red = 255
+		green = -127 * math.Pow((value - (part * 9)) / part, 2) + 255
+		blue = 0
+	} else if value < part * 11 {
+		red = 255
+		green = 128 * math.Pow((value - (part * 11)) / part, 2)
+		blue = 0
+	} else if value <= part * 12 {
+		red = -127 * math.Pow((value - (part * 11)) / part, 2) + 255
+		green = 0
+		blue = 0
+	}
+
+	return uint8(red), uint8(green), uint8(blue)
+}
+/*// RGBValue returns a number between 0 and 255
+func RGBValue(value float64, maxValue float64, minValue float64) (uint8, uint8, uint8) {
+	//value  = value - 273
+	part := (maxValue - minValue) / 12
+	value = value - minValue
+	red := 0.0
+	green := 0.0
+	blue := 0.0
+	if value < part * 4 {
+		red = 0.0
+		green = 0.0
+		blue = 128.0
+	} else if value < part * 5 {
+		red = 0
+		green = 0
 		blue = ((value - part * 4) / part + 1) * 128
 	} else if value < part * 6 {
 		red = 0
@@ -140,7 +188,7 @@ func RGBValue(value float64, maxValue float64, minValue float64) (uint8, uint8, 
 
 	return uint8(red), uint8(green), uint8(blue)
 }
-
+*/
 // returns a number between 0 and 255
 func blueValue(value float64, maxValue float64, minValue float64) uint8 {
 	//value  = value - 273
